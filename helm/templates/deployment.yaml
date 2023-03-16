@@ -9,17 +9,18 @@ spec:
     matchLabels: 
 # set your user name
       app: {{ .Release.Name }}
-  volumes:
-    - name: index-html
-      configMap:
-        name: index.html
-        defaultMode: 420
+ 
   template:
     metadata:
       labels:
 # set your user name
         app: {{ .Release.Name }}
     spec:
+      volumes:
+      - name: index-html
+        configMap:
+          name: index.html
+          defaultMode: 420
       containers:
         - resources: {}
           terminationMessagePath: /dev/termination-log
