@@ -10,10 +10,10 @@ spec:
 # set your user name
       app: {{ .Release.Name }}
   volumes:
-        - name: index-html
-          configMap:
-            name: index.html
-            defaultMode: 420
+    - name: index-html
+      configMap:
+        name: index.html
+        defaultMode: 420
   template:
     metadata:
       labels:
@@ -28,11 +28,11 @@ spec:
             - containerPort: {{ .Values.containers.containerPort }}
               protocol: TCP
           imagePullPolicy: IfNotPresent
-       volumeMounts:
-         - name: index-html
-           mountPath: /tmp/html # this will mount the html.index file to it application location
 # update with the iamge you build in part 1
           image: {{ .Values.containers.image }}:{{ .Values.containers.tag }}
+          volumeMounts:
+            - name: index-html
+              mountPath: /tmp/html # this will mount the html.index file to it application location
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
   strategy:
